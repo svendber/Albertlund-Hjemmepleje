@@ -13,16 +13,16 @@ namespace Albertlund_Hjemmepleje.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult RetProfil()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Ret profil page";
 
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult OpretBruger()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Opret bruger page";
 
             return View();
         }
