@@ -26,5 +26,11 @@ namespace Albertlund_Hjemmepleje.Controllers
 
             return View();
         }
+
+        public ActionResult RetProfil()
+        {
+
+            return View();
+        }
     }
 }
