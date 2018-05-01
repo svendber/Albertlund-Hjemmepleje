@@ -22,15 +22,13 @@ namespace Albertlund_Hjemmepleje.Controllers
 
         public ActionResult OpretBruger()
         {
-            ViewBag.Message = "Opret bruger page";
-
             return View();
         }
 
-        public ActionResult RetProfil()
+        public ActionResult Log()
         {
 
-            return View();
+
         }
     }
 }
