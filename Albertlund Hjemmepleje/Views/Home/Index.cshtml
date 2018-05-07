@@ -3,16 +3,16 @@
     ViewBag.Title = "Home Page";
 }
 
-<!-- <h1>Albertslund Homecare</h1> -->
 <div class="jumbotron">
-    <h3>Log ind</h3>
-    <form>
-        E-mail <br>
-        <input type="text" name="email"><br>
-        Password <br>
-        <input type="password" name="password">
-        <br />
-        <button type="submit" name="login" onserverclick="location.ref='@Url.Action("RetProfil")'"> Login</button>
+    <form method="post">
+        <fieldset class="">
+            <legend>Log ind</legend>
+            E-mail <br>
+            <input type="text" name="email"><br>
+            Password <br>
+            <input type="password" name="password">
+            <br />
+            <button type="submit" name="login" onserverclick="location.ref='@Url.Action("RetProfil")'"> Login</button>
+        </fieldset>
     </form>
-
 </div>

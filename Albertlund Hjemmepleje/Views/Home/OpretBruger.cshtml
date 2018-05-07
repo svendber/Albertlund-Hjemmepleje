@@ -3,20 +3,23 @@
 }
 
 <div class="jumbotron">
-    <h3>Opret bruger</h3>
-    <form>
+    <form method="post">
+    <fieldset class="">
+        <legend>Opret bruger</legend>
         Fulde navn
-        <br><input type="text" name="fullname" /><br>
+        <br><input type="text" name="fullname"/><br>
         E-mail
-        <br><input type="email" name="email" /><br>
+        <br><input type="email" name="email"/><br>
         Telefonnummer
-        <br><input type="number" name="phone" /><br>
+        <br><input type="number" name="phone"/><br>
         Stilling
-        <br><input type="text" name="occupation" /><br>
+        <br><input type="text" name="occupation"/><br>
         Adminrettigheder
         <br><input type="checkbox" name="userType" value="admin"/><br>
-        
+
         <button type="submit" name="createUser" onclick="alert('Brugeren er oprettet')">Opret bruger</button>
+    </fieldset>
+    
     </form>
 
 </div>

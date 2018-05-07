@@ -15,20 +15,17 @@ namespace Albertlund_Hjemmepleje.Controllers
 
         public ActionResult RetProfil()
         {
-            ViewBag.Message = "Ret profil page";
+            return View();
 
 
         }
 
-        public ActionResult OpretBruger()
-        {
+        public ActionResult OpretBruger(){
             return View();
         }
 
-        public ActionResult Log()
-        {
+        public ActionResult Log(){
             {
-
                 return View();
             }
         }
