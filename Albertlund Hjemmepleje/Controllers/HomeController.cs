@@ -17,7 +17,7 @@ namespace Albertlund_Hjemmepleje.Controllers
         {
             ViewBag.Message = "Ret profil page";
 
-            return View();
+
         }
 
         public ActionResult OpretBruger()
