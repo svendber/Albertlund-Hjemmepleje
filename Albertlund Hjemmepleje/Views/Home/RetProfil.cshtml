@@ -3,36 +3,11 @@
     ViewBag.Title = "RetProfil";
 }
 
-@{
-    Validation.RequireField("name", "Udfyld venligst med dit fulde navn");
-    Validation.RequireField("email", "E-mail er ikke korrekt udfyldt");
-    Validation.RequireField("phone", "Telefon nr. ikke korrekt udfyldt");
-    Validation.RequireField("occupation", "Stilling er ikke korrekt udfyldt");
-    Validation.Add("phone", Validator.Integer());
-
-    if (IsPost)  {
-        var name = Request.Form["name"];
-        var email = Request.Form["email"];
-        var phone = Request.Form["phone"].AsInt();
-        var occupation = Request.Form["occupation"];
-        if(Validation.IsValid()){
-            <text>
-              Gemte ændringer: <br />
-              Fulde navn: @name <br />
-              E-mail: @email <br />
-              Tlf nr.: @phone <br />
-              Occupation: @occupation <br />
-            </text>
-        }
-    }
-}
-
 <!DOCTYPE html>
 
 <html>
 <head>
     <title>Ret profil - Albertslund Hjemmepleje</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 </head>
 <body>
         <form method="post">
