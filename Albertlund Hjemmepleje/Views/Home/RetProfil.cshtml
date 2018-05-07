@@ -1,0 +1,90 @@
+﻿
+@{
+    ViewBag.Title = "RetProfil";
+}
+
+@{
+    Validation.RequireField("name", "Udfyld venligst med dit fulde navn");
+    Validation.RequireField("email", "E-mail er ikke korrekt udfyldt");
+    Validation.RequireField("phone", "Telefon nr. ikke korrekt udfyldt");
+    Validation.RequireField("occupation", "Stilling er ikke korrekt udfyldt");
+    Validation.Add("phone", Validator.Integer());
+
+    if (IsPost)  {
+        var name = Request.Form["name"];
+        var email = Request.Form["email"];
+        var phone = Request.Form["phone"].AsInt();
+        var occupation = Request.Form["occupation"];
+        if(Validation.IsValid()){
+            <text>
+              Gemte ændringer: <br />
+              Fulde navn: @name <br />
+              E-mail: @email <br />
+              Tlf nr.: @phone <br />
+              Occupation: @occupation <br />
+            </text>
+        }
+    }
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Ret profil - Albertslund Hjemmepleje</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+</head>
+<body>
+        <form method="post">
+            <fieldset>
+                <legend>Ret profil</legend>
+                <div class="row">
+                    <div class="col-2">
+                        <label for="Name">Fulde navn:</label>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" name="Name" value="@Request.Form["name"]" />
+                    </div>
+                    @Html.ValidationMessage("name")
+                </div>
+                <div class="row">
+                    <div class="col-2">
+                        <label for="email">E-mail:</label>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" name="email" value="@Request.Form["email"]" />
+                    </div>
+                    @Html.ValidationMessage("email")
+                </div>
+                <div class="row">
+                    <div class="col-2">
+                        <label for="phone">Tlf nr.:</label>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" name="phone" value="@Request.Form["phone"]" />
+                    </div>
+                    @Html.ValidationMessage("phone")
+                </div>
+                <div class="row">
+                    <div class="col-2">
+                        <label for="occupation">Stilling:</label>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" name="occupation" value="@Request.Form["occupation"]" />
+                    </div>
+                    @Html.ValidationMessage("occupation")
+                </div>
+
+                
+              <div class="col-1">
+                <input type="submit" value="Gem ændringer" class="submit" />
+              </div>
+
+            </fieldset>
+        </form>
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+</body>
+</html>
