@@ -5,49 +5,18 @@
 
 <div class="jumbotron">
     <form method="post">
-        <fieldset class="">
-            <legend>Ret profil</legend>
-            <div class="row">
-                <div class="col-2">
-                    <label for="name">Fulde navn</label>
-                </div>
-                <div class="col-4">
-                    <input type="text" name="Name" />
-                </div>
+    <fieldset class="">
+        <legend>Ret profil</legend>
+        Fulde navn
+        <br><input type="text" name="fullname"/><br>
+        E-mail
+        <br><input type="text" name="email"/><br>
+        Telefonnummer
+        <br><input type="number" name="phone"/><br>
+        Stilling
+        <input type="text" name="occupation"/><br>
 
-            </div>
-            <div class="row">
-                <div class="col-2">
-                    <label for="email">E-mail</label>
-                </div>
-                <div class="col-4">
-                    <input type="text" name="email" />
-                </div>
-                   
-            </div>
-            <div class="row">
-                <div class="col-2">
-                    <label for="phone">Tlf. nr.</label>
-                </div>
-                <div class="col-4">
-                    <input type="text" name="phone"/>
-                </div>
-
-            </div>
-            <div class="row">
-                <div class="col-2">
-                    <label for="occupation">Stilling</label>
-                </div>
-                <div class="col-4">
-                    <input type="text" name="occupation"/>
-                </div>
-
-            </div>
-                
-            <div class="col-1">
-                <input type="submit" onserverclick="location.ref='@Url.Action("Index")'" class="submit" onclick="alert('Brugeren er rettet')" />
-            </div>
+        <input type="submit" onserverclick="location.ref='@Url.Action("Index")'" class="submit" onclick="alert('Brugeren er rettet')" />
         </fieldset>
     </form>
-
 </div>
