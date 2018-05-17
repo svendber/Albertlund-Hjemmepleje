@@ -57,6 +57,13 @@ namespace Albertlund_Hjemmepleje.Controllers
                 return View();
             }
         }
+
+        public ActionResult ForgottenPassword()
+        {
+            {
+                return View();
+            }
+        }
     }
 }
 
