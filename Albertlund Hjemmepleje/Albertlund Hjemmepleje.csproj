@@ -185,6 +185,10 @@
     <Compile Include="Migrations\201805170858046_intialcreate.Designer.cs">
       <DependentUpon>201805170858046_intialcreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805171306330_boooh.cs" />
+    <Compile Include="Migrations\201805171306330_boooh.Designer.cs">
+      <DependentUpon>201805171306330_boooh.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Albertlund_HjemmeplejeContext.cs" />
     <Compile Include="Models\Entities\Person.cs" />
@@ -238,7 +242,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Login\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -259,6 +262,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805170858046_intialcreate.resx">
       <DependentUpon>201805170858046_intialcreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805171306330_boooh.resx">
+      <DependentUpon>201805171306330_boooh.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
