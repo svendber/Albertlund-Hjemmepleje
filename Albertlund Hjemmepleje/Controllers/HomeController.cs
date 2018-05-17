@@ -36,6 +36,7 @@ namespace Albertlund_Hjemmepleje.Controllers
             User user = new User(name, email, phone, occupation, admin);
 
             //saveToDatabase(user);
+            
 
             var loggedIn = Session["login"].Equals(true);
 
