@@ -16,7 +16,7 @@ namespace Albertlund_Hjemmepleje.Models.Entities
         [System.ComponentModel.DataAnnotations.Required]
         public string password { get; set; }
         [System.ComponentModel.DataAnnotations.Required]
-        public string role { get; set; }
+        public Boolean role { get; set; }
         [System.ComponentModel.DataAnnotations.Required]
         public string occupation { get; set; }
         [System.ComponentModel.DataAnnotations.Required]
