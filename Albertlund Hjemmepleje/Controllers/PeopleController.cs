@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Albertlund_Hjemmepleje.Models;
 using Albertlund_Hjemmepleje.Models.Entities;
+using System.Net.Mail;
 
 namespace Albertlund_Hjemmepleje.Controllers
 {
@@ -47,12 +48,22 @@ namespace Albertlund_Hjemmepleje.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "iD,email,name,password,role,occupation")] Person person)
+        public ActionResult Create([Bind(Include = "email,name,role,occupation")] Person person)
         {
+
             if (ModelState.IsValid)
             {
+
+                person.password = "NewUser123456";
                 db.People.Add(person);
                 db.SaveChanges();
+                
+                string body = "Hej \n" + "Du er oprettet hos Albertslund Hjemmepleje \n" +
+                              "Dette er dit password: \b NewUser123456 \n" + 
+                              "Vi anbefaler dig, at du ændrer det første gang, du logger ind.";
+             
+                sendMail(person.email, body);
+
                 return RedirectToAction("Index");
             }
 
@@ -123,6 +134,22 @@ namespace Albertlund_Hjemmepleje.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public void sendMail(string toMail, string body)
+        {
+            Console.WriteLine("Send mail!!!!");
+            MailMessage mail = new MailMessage("albertslundhjemmepleje@gmail.com", toMail);
+            SmtpClient client = new SmtpClient();
+            client.UseDefaultCredentials = false;
+            client.Credentials = new NetworkCredential("albertslundhjemmepleje@gmail.com", "svendoliviajulie");
+            client.Port = 25;
+            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            client.Host = "smtp.gmail.com";
+            mail.Subject = "Your password to Albertslund Hjemmepleje.";
+            mail.Body = body;
+            client.EnableSsl = true;
+            client.Send(mail);
         }
     }
 }
