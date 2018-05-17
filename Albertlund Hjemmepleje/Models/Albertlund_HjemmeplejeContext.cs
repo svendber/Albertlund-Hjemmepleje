@@ -21,4 +21,5 @@ namespace Albertlund_Hjemmepleje.Models
 
         public System.Data.Entity.DbSet<Albertlund_Hjemmepleje.Models.Entities.Person> People { get; set; }
     }
+
 }
