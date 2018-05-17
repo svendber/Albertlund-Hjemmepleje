@@ -9,7 +9,7 @@ namespace Albertlund_Hjemmepleje.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Login()
         {
             string email = Request["email"];
             string password = Request["password"];
@@ -46,7 +46,7 @@ namespace Albertlund_Hjemmepleje.Controllers
             }
             else
             {
-                return Index();
+                return Login();
             }
 
         }

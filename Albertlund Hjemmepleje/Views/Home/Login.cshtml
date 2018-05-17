@@ -1,0 +1,56 @@
+﻿@model Albertlund_Hjemmepleje.Models.Entities.Person
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<h2>Log ind</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.email, "E-mail", htmlAttributes: new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.email, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.email, "", new {@class = "text-danger"})
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.password, "Password", htmlAttributes: new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.password, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.password, "", new {@class = "text-danger"})
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Log ind" onserverclick="location.ref='@Url.Action("RetProfil")'" class="btn btn-default"/>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+<!--<div class="jumbotron">
+    <form method="post">
+        <fieldset class="">
+            <legend>Log ind</legend>
+            E-mail <br>
+            <input type="text" name="email"><br>
+            Password <br>
+            <input type="password" name="password">
+            <br />
+            <button type="submit" name="login" onserverclick="location.ref='@Url.Action("RetProfil")'"> Login</button>
+        </fieldset>
+    </form>
+</div> -->
