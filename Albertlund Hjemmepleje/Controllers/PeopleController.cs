@@ -58,9 +58,9 @@ namespace Albertlund_Hjemmepleje.Controllers
              //if (ModelState.IsValid)
              { 
                 person.password = "NewUser123456";
-                person.role = true;
-                person.occupation = "ged";
-                person.phone = 12345678;
+                //person.role = true;
+                //person.occupation = "ged";
+                //person.phone = 12345678;
                 db.People.Add(person); 
                 db.SaveChanges();
 
@@ -191,11 +191,11 @@ namespace Albertlund_Hjemmepleje.Controllers
             Console.WriteLine("Send mail!!!!");
             MailMessage mail = new MailMessage("albertslundhjemmepleje@gmail.com", toMail);
             SmtpClient client = new SmtpClient();
+            client.Host = "smtp.gmail.com";
             client.UseDefaultCredentials = false;
             client.Credentials = new NetworkCredential("albertslundhjemmepleje@gmail.com", "svendoliviajulie");
             client.Port = 25;
             client.DeliveryMethod = SmtpDeliveryMethod.Network;
-            client.Host = "smtp.gmail.com";
             mail.Subject = "Your password to Albertslund Hjemmepleje.";
             mail.Body = body;
             client.EnableSsl = true;
