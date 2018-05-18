@@ -55,9 +55,8 @@ namespace Albertlund_Hjemmepleje.Controllers
         public ActionResult Create([Bind(Include = "email,name,phone,occupation,role")] Person person)
         {
             Console.Write("Hej2");
-             if (ModelState.IsValid)
-            {
-               
+             //if (ModelState.IsValid)
+             { 
                 person.password = "NewUser123456";
                 person.role = true;
                 person.occupation = "ged";
@@ -74,7 +73,7 @@ namespace Albertlund_Hjemmepleje.Controllers
                 return RedirectToAction("Index");
             }
 
-            return View(person);
+            //return View(person);
         }
 
         // GET: People/Edit/5
