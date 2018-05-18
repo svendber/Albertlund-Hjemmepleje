@@ -50,14 +50,18 @@ namespace Albertlund_Hjemmepleje.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "email,name,role,occupation")] Person person)
+        public ActionResult Create([Bind(Include = "email,name,phone,occupation,role")] Person person)
         {
-
-            if (ModelState.IsValid)
+            Console.Write("Hej2");
+             if (ModelState.IsValid)
             {
-               
+                person.email = "svendber@hotmail.co.uk";
+                person.name = "svend";
                 person.password = "NewUser123456";
-                db.People.Add(person);
+                person.role = true;
+                person.occupation = "ged";
+                person.phone = 12345678;
+                db.People.Add(person); 
                 db.SaveChanges();
                 
                 string body = "Hej \n" + "Du er oprettet hos Albertslund Hjemmepleje \n" +
