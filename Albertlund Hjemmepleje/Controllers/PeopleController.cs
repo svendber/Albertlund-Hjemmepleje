@@ -20,7 +20,7 @@ namespace Albertlund_Hjemmepleje.Controllers
 
         // GET: People
         public ActionResult Index()
-        { 
+        {
             return View(db.People.ToList());
         }
 
@@ -31,11 +31,13 @@ namespace Albertlund_Hjemmepleje.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Person person = db.People.Find(id);
             if (person == null)
             {
                 return HttpNotFound();
             }
+
             return View(person);
         }
 
@@ -50,20 +52,20 @@ namespace Albertlund_Hjemmepleje.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "email,name,role,occupation")] Person person)
+        public ActionResult Create([Bind(Include = "email,name,role,occupation")]
+            Person person)
         {
 
             if (ModelState.IsValid)
             {
-               
                 person.password = "NewUser123456";
                 db.People.Add(person);
                 db.SaveChanges();
-                
+
                 string body = "Hej \n" + "Du er oprettet hos Albertslund Hjemmepleje \n" +
-                              "Dette er dit password: \b NewUser123456 \n" + 
+                              "Dette er dit password: \b NewUser123456 \n" +
                               "Vi anbefaler dig, at du ændrer det første gang, du logger ind.";
-             
+
                 sendMail(person.email, body);
 
                 return RedirectToAction("Index");
@@ -79,11 +81,13 @@ namespace Albertlund_Hjemmepleje.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Person person = db.People.Find(id);
             if (person == null)
             {
                 return HttpNotFound();
             }
+
             return View(person);
         }
 
@@ -92,7 +96,8 @@ namespace Albertlund_Hjemmepleje.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "iD,email,name,password,role,occupation")] Person person)
+        public ActionResult Edit([Bind(Include = "iD,email,name,password,role,occupation")]
+            Person person)
         {
             if (ModelState.IsValid)
             {
@@ -101,6 +106,7 @@ namespace Albertlund_Hjemmepleje.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+
             return View(person);
         }
 
@@ -111,11 +117,13 @@ namespace Albertlund_Hjemmepleje.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Person person = db.People.Find(id);
             if (person == null)
             {
                 return HttpNotFound();
             }
+
             return View(person);
         }
 
@@ -136,7 +144,44 @@ namespace Albertlund_Hjemmepleje.Controllers
             {
                 db.Dispose();
             }
+
             base.Dispose(disposing);
+        }
+
+        public ActionResult Login()
+        {
+            string email = Request["email"];
+            string password = Request["password"];
+
+            //datebase kald ... er brugeren oprettet?
+
+            Session["login"] = true;
+            return View();
+        }
+
+
+        public ActionResult Log()
+        {
+            {
+                return View();
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ForgottenPassword(string email)
+        {
+            Person person = db.People.Find(email);
+
+            string body = "Hej \n Dit password er nulstillet. \n " +
+                          "Dit nye password er: NewUser123456";
+            person.password = "NewUser123456";
+            db.Entry(person).State = EntityState.Modified;
+            db.SaveChanges();
+            sendMail(email, body);
+            {
+                return View();
+            }
         }
 
         public void sendMail(string toMail, string body)
