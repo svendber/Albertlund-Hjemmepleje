@@ -55,45 +55,7 @@ namespace Albertlund_Hjemmepleje.Controllers
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-                    builder.DataSource = "Server=tcp:webappserver-1.database.windows.net,1433;Initial Catalog=personDB;Persist Security Info=False;User ID={your_username};Password={your_password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30";
-                    builder.UserID = "svendber";
-                    builder.Password = "svendsej123";
-                    builder.InitialCatalog = "PersonDB";
-
-                    using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
-                    {
-                        Console.WriteLine("\nQuery data example:");
-                        Console.WriteLine("=========================================\n");
-
-                        connection.Open();
-                        StringBuilder sb = new StringBuilder();
-                        sb.Append("INSERT INTO ");
-                        sb.Append("FROM [SalesLT].[ProductCategory] pc ");
-                        sb.Append("JOIN [SalesLT].[Product] p ");
-                        sb.Append("ON pc.productcategoryid = p.productcategoryid;");
-                        String sql = sb.ToString();
-
-                        using (SqlCommand command = new SqlCommand(sql, connection))
-                        {
-                            using (SqlDataReader reader = command.ExecuteReader())
-                            {
-                                while (reader.Read())
-                                {
-                                    Console.WriteLine("{0} {1}", reader.GetString(0), reader.GetString(1));
-                                }
-                            }
-                        }
-                    }
-                }
-                catch (SqlException e)
-                {
-                    Console.WriteLine(e.ToString());
-                }
-                Console.ReadLine();
-
+               
                 person.password = "NewUser123456";
                 db.People.Add(person);
                 db.SaveChanges();
