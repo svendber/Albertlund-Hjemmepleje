@@ -134,6 +134,7 @@ namespace Albertlund_Hjemmepleje.Controllers
         {
             if (ModelState.IsValid)
             {
+                person.password = SecurePasswordHasher.Hash(person.password);
                 db.Entry(person).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
