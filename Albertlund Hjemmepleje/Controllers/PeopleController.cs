@@ -77,14 +77,14 @@ namespace Albertlund_Hjemmepleje.Controllers
         }
 
         // GET: People/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(string email)
         {
-            if (id == null)
+            if (email == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Person person = db.People.Find(id);
+            Person person = db.People.Find(email);
             if (person == null)
             {
                 return HttpNotFound();
@@ -98,7 +98,7 @@ namespace Albertlund_Hjemmepleje.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "iD,email,name,password,role,occupation")]
+        public ActionResult Edit([Bind(Include = "email,name,password,role,occupation")]
             Person person)
         {
             if (ModelState.IsValid)
@@ -113,14 +113,14 @@ namespace Albertlund_Hjemmepleje.Controllers
         }
 
         // GET: People/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(string email)
         {
-            if (id == null)
+            if (email == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Person person = db.People.Find(id);
+            Person person = db.People.Find(email);
             if (person == null)
             {
                 return HttpNotFound();
@@ -132,9 +132,9 @@ namespace Albertlund_Hjemmepleje.Controllers
         // POST: People/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(string email)
         {
-            Person person = db.People.Find(id);
+            Person person = db.People.Find(email);
             db.People.Remove(person);
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -185,15 +185,17 @@ namespace Albertlund_Hjemmepleje.Controllers
       
         public ActionResult ForgottenPassword()
         {
-          /*  Person person = db.People.Find(email);
+            string email = Request["email"];
+
+          Person person = db.People.Find(email);
 
           string body = "Hej \n Dit password er nulstillet. \n " +
-                          "Dit nye password er: NewUser123456";
-            person.password = "NewUser123456";
+                          "Dit nye password er: NewPassword123456";
+            person.password = "NewPassword123456";
             db.Entry(person).State = EntityState.Modified;
             db.SaveChanges();
             sendMail(email, body);
-            */
+          
                 return View();
             
         }

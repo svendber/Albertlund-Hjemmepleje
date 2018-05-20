@@ -7,9 +7,6 @@ namespace Albertlund_Hjemmepleje.Models.Entities
 {
     public class Person
     {
-
-        public int iD { get; set; }
-        [System.ComponentModel.DataAnnotations.Required]
         public string email { get; set; }
         [System.ComponentModel.DataAnnotations.Required]
         public string name { get; set; }
