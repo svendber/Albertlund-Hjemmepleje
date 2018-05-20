@@ -10,7 +10,9 @@ using Albertlund_Hjemmepleje.Models;
 using Albertlund_Hjemmepleje.Models.Entities;
 using System.Net.Mail;
 using System.Data.SqlClient;
+using System.Reflection.Emit;
 using System.Text;
+using System.Web.UI.WebControls.WebParts;
 
 namespace Albertlund_Hjemmepleje.Controllers
 {
@@ -155,7 +157,20 @@ namespace Albertlund_Hjemmepleje.Controllers
             string email = Request["email"];
             string password = Request["password"];
 
-            //datebase kald ... er brugeren oprettet?
+            Person person = db.People.Find(email);
+
+            if (person == null)
+            {
+                Console.WriteLine("User does not exist");
+            }
+            else
+            {
+                Boolean verify = SecurePasswordHasher.Verify(password, person.password);
+                if (verify == true)
+                {
+                    return RedirectToAction("Index");
+                }
+            }
 
             Session["login"] = true;
             return View();

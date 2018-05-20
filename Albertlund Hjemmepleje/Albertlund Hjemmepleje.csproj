@@ -240,7 +240,9 @@
     <Content Include="Views\People\Details.cshtml" />
     <Content Include="Views\People\Edit.cshtml" />
     <Content Include="Views\People\Index.cshtml" />
-    <Content Include="Views\People\ForgottenPassword.cshtml" />
+    <Content Include="Views\People\ForgottenPassword.cshtml">
+      <BrowseToURL>~/People/ForgottenPassword</BrowseToURL>
+    </Content>
     <Content Include="Views\People\Log.cshtml" />
   </ItemGroup>
   <ItemGroup>
