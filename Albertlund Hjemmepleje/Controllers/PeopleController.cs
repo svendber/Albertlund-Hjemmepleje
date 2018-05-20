@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using Albertlund_Hjemmepleje.Models;
+using Albertlund_Hjemmepleje.Models.Entities;
+using System;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
+using System.Net.Mail;
 using System.Web.Mvc;
 using Albertlund_Hjemmepleje.Models;
 using Albertlund_Hjemmepleje.Models.Entities;
 using System.Net.Mail;
 using System.Data.SqlClient;
-using System.Reflection.Emit;
 using System.Text;
-using System.Web.UI.WebControls.WebParts;
 
 namespace Albertlund_Hjemmepleje.Controllers
 {
@@ -184,21 +182,20 @@ namespace Albertlund_Hjemmepleje.Controllers
             }
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult ForgottenPassword(string email)
+      
+        public ActionResult ForgottenPassword()
         {
-            Person person = db.People.Find(email);
+          /*  Person person = db.People.Find(email);
 
-            string body = "Hej \n Dit password er nulstillet. \n " +
+          string body = "Hej \n Dit password er nulstillet. \n " +
                           "Dit nye password er: NewUser123456";
             person.password = "NewUser123456";
             db.Entry(person).State = EntityState.Modified;
             db.SaveChanges();
             sendMail(email, body);
-            {
+            */
                 return View();
-            }
+            
         }
 
         public void sendMail(string toMail, string body)
