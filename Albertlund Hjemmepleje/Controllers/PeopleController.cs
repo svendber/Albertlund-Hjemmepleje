@@ -54,7 +54,7 @@ namespace Albertlund_Hjemmepleje.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "email,name,phone,occupation,role")] Person person)
         {
-            Console.Write("Hej2");
+            System.Diagnostics.Debug.WriteLine("Hej2");
              //if (ModelState.IsValid)
              { 
                 
@@ -64,12 +64,13 @@ namespace Albertlund_Hjemmepleje.Controllers
                 //person.phone = 12345678;
                 db.People.Add(person); 
                 db.SaveChanges();
+                string email = person.email;
 
                 string body = "Hej \n" + "Du er oprettet hos Albertslund Hjemmepleje \n" +
                               "Dette er dit password: \b NewUser123456 \n" +
                               "Vi anbefaler dig, at du ændrer det første gang, du logger ind.";
-
-                sendMail(person.email, body);
+                System.Diagnostics.Debug.WriteLine(email);
+                sendMail(email, body);
 
                 return RedirectToAction("Index");
             }
@@ -187,33 +188,53 @@ namespace Albertlund_Hjemmepleje.Controllers
         public ActionResult ForgottenPassword()
         {
             string email = Request["email"];
-           Person person = db.People.Find(email);
-            
-          string body = "Hej \n Dit password er nulstillet. \n " +
-                          "Dit nye password er: NewUser123456";
-            person.password = SecurePasswordHasher.Hash("NewUser123456");
-            db.Entry(person).State = EntityState.Modified;
-            db.SaveChanges();
-            sendMail(email, body);
-            
-                return View();
+            Person person = db.People.Find(email);
+
+            if (person == null)
+            {
+
+            }
+            else
+            {
+                string body = "Hej \n Dit password er nulstillet. \n " +
+                          "Dit nye password er: NewPassword123456";
+                person.password = SecurePasswordHasher.Hash("NewPassword123456");
+                db.Entry(person).Property("password").IsModified = true;
+                db.SaveChanges();
+                sendMail(email, body);
+            }
+            return View();
             
         }
 
         public void sendMail(string toMail, string body)
         {
-            Console.WriteLine("Send mail!!!!");
-            MailMessage mail = new MailMessage("albertslundhjemmepleje@gmail.com", toMail);
-            SmtpClient client = new SmtpClient();
-            client.Host = "smtp.gmail.com";
-            client.UseDefaultCredentials = false;
-            client.Credentials = new NetworkCredential("albertslundhjemmepleje@gmail.com", "svendoliviajulie");
-            client.Port = 25;
-            client.DeliveryMethod = SmtpDeliveryMethod.Network;
-            mail.Subject = "Your password to Albertslund Hjemmepleje.";
-            mail.Body = body;
-            client.EnableSsl = true;
-            client.Send(mail);
+            if (String.IsNullOrEmpty(toMail))
+                return;
+            try
+            {
+                MailMessage mail = new MailMessage();
+                mail.To.Add(toMail);
+                //mail.To.Add("xxx@gmail.com");
+                mail.From = new MailAddress("albertslundhjemmepleje@gmail.com");
+                mail.Subject = "Your password to Albertslund Hjemmepleje.";
+
+                mail.Body = body;
+
+                mail.IsBodyHtml = false;
+                SmtpClient smtp = new SmtpClient();
+                smtp.Host = "smtp.gmail.com"; 
+                smtp.Credentials = new System.Net.NetworkCredential
+                     ("albertslundhjemmepleje@gmail.com", "svendoliviajulie"); 
+                smtp.Port = 587;
+                
+                smtp.EnableSsl = true;
+                smtp.Send(mail);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception in sendEmail:" + ex.Message);
+            }
         }
     }
 }

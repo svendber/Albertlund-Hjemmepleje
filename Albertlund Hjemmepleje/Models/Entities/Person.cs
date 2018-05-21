@@ -20,7 +20,7 @@ namespace Albertlund_Hjemmepleje.Models.Entities
         [System.ComponentModel.DataAnnotations.Required]
         public string occupation { get; set; }
         [System.ComponentModel.DataAnnotations.Required]
-        public uint phone { get; set; }
+        public string phone { get; set; }
        
 
 
