@@ -190,6 +190,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Albertlund_HjemmeplejeContext.cs" />
+    <Compile Include="Models\Entities\Log.cs" />
     <Compile Include="Models\Entities\Person.cs" />
     <Compile Include="Models\Entities\SecurePasswordHasher.cs" />
     <Compile Include="Models\Entities\User.cs" />
