@@ -18,6 +18,11 @@ namespace Albertlund_Hjemmepleje.Controllers
         // GET: People
         public ActionResult Index()
         {
+            if (Session["login"] == null)
+            {
+                return RedirectToAction("Login");
+                
+            }
             return View(db.People.ToList());
         }
 
@@ -41,6 +46,10 @@ namespace Albertlund_Hjemmepleje.Controllers
         // GET: People/Create
         public ActionResult Create()
         {
+            if (Session["login"] == null)
+            {
+                return RedirectToAction("Login");
+            }
             return View();
         }
 
@@ -51,6 +60,8 @@ namespace Albertlund_Hjemmepleje.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "email,name,phone,occupation,role")] Person person)
         {
+
+            
             System.Diagnostics.Debug.WriteLine("Hej2");
              //if (ModelState.IsValid)
              { 
@@ -169,16 +180,19 @@ namespace Albertlund_Hjemmepleje.Controllers
                 }
             }
 
-            Session["login"] = true;
+            Session["login"] = email;
             return View();
         }
 
 
         public ActionResult Log()
         {
-            
-                return View();
-            
+            if (Session["login"] == null)
+            {
+                return RedirectToAction("Login");
+            }
+            return View();
+
         }
 
       
