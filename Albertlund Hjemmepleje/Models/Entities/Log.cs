@@ -7,9 +7,9 @@ namespace Albertlund_Hjemmepleje.Models.Entities
 {
     public class Log
     {
-       public string Email { get; set; }
+       public string email { get; set; }
         
-        public DateTime Time { get; set; }
+        public DateTime time { get; set; }
 
     }
 }

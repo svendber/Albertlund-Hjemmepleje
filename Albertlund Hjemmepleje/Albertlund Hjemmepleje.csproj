@@ -17,8 +17,7 @@
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <Use64BitIISExpress>
-    </Use64BitIISExpress>
+    <Use64BitIISExpress>false</Use64BitIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -189,6 +188,10 @@
     <Compile Include="Migrations\201805171306330_boooh.Designer.cs">
       <DependentUpon>201805171306330_boooh.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805211244111_Log.cs" />
+    <Compile Include="Migrations\201805211244111_Log.Designer.cs">
+      <DependentUpon>201805211244111_Log.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Albertlund_HjemmeplejeContext.cs" />
     <Compile Include="Models\Entities\Log.cs" />
@@ -270,6 +273,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805171306330_boooh.resx">
       <DependentUpon>201805171306330_boooh.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805211244111_Log.resx">
+      <DependentUpon>201805211244111_Log.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -176,9 +176,9 @@ namespace Albertlund_Hjemmepleje.Controllers
 
         public ActionResult Log()
         {
-            {
+            
                 return View();
-            }
+            
         }
 
       

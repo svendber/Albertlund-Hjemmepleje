@@ -8,10 +8,10 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Email)
+            @Html.DisplayNameFor(model => model.email)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
+        <th>    
+            @Html.DisplayNameFor(model => model.time)
         </th>
         <th></th>
     </tr>
@@ -19,10 +19,10 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Email)
+            @Html.DisplayFor(modelItem => item.email)
         </td>
         <td>
-            @Html.DisplayFor(modelIteam => item.Time)
+            @Html.DisplayFor(modelIteam => item.time)
         </td>
     </tr>
 }
