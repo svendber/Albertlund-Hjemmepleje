@@ -55,7 +55,7 @@ namespace Albertlund_Hjemmepleje.Controllers
                 return View();
             }
                 ViewBag.Error = TempData["error"];
-                return null;
+                return RedirectToAction("Home");
         }
 
         // POST: People/Create
@@ -85,7 +85,7 @@ namespace Albertlund_Hjemmepleje.Controllers
                 System.Diagnostics.Debug.WriteLine(email);
                 sendMail(email, body);
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Home");
             }
 
             //return View(person);
@@ -191,14 +191,9 @@ namespace Albertlund_Hjemmepleje.Controllers
                         Session["admin"] = "user";
                     }
 
-                    return RedirectToAction("Index");
-
+                    return RedirectToAction("Home");
                 }
             }
-
-            
-
-
             return View();
         }
 
@@ -222,7 +217,7 @@ namespace Albertlund_Hjemmepleje.Controllers
                 return View();
             }
 
-            return null;
+            return RedirectToAction("Home");
 
         }
 
@@ -246,9 +241,22 @@ namespace Albertlund_Hjemmepleje.Controllers
                 sendMail(email, body);
             }
             return View();
-            
         }
 
+        public ActionResult Settings()
+        {
+            if (Session["login"] == null)
+            {
+                return RedirectToAction("Login");
+            }
+
+            return View();
+        }
+
+        public ActionResult Home()
+        {
+            return View();
+        }
         public void sendMail(string toMail, string body)
         {
             if (String.IsNullOrEmpty(toMail))
