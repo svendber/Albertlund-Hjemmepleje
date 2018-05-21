@@ -6,9 +6,6 @@ using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Web.Mvc;
-using Albertlund_Hjemmepleje.Models;
-using Albertlund_Hjemmepleje.Models.Entities;
-using System.Net.Mail;
 using System.Data.SqlClient;
 using System.Text;
 
