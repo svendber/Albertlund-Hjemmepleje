@@ -50,7 +50,12 @@ namespace Albertlund_Hjemmepleje.Controllers
             {
                 return RedirectToAction("Login");
             }
-            return View();
+            if (Session["admin"].Equals("admin"))
+            {
+                return View();
+            }
+
+            return null;
         }
 
         // POST: People/Create
@@ -176,11 +181,24 @@ namespace Albertlund_Hjemmepleje.Controllers
                 Boolean verify = SecurePasswordHasher.Verify(password, person.password);
                 if (verify == true)
                 {
+                    Session["login"] = email;
+                    if (person.role)
+                    {
+                        Session["admin"] = "admin";
+                    }
+                    else
+                    {
+                        Session["admin"] = "user";
+                    }
+
                     return RedirectToAction("Index");
+
                 }
             }
 
-            Session["login"] = email;
+            
+
+
             return View();
         }
 
@@ -191,7 +209,13 @@ namespace Albertlund_Hjemmepleje.Controllers
             {
                 return RedirectToAction("Login");
             }
-            return View();
+
+            if (Session["admin"].Equals("admin"))
+            {
+                return View();
+            }
+
+            return null;
 
         }
 
