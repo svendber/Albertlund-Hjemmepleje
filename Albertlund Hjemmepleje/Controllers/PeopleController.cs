@@ -18,6 +18,11 @@ namespace Albertlund_Hjemmepleje.Controllers
         // GET: People
         public ActionResult Index()
         {
+            if (Session["login"] == null)
+            {
+                return RedirectToAction("Login");
+                
+            }
             return View(db.People.ToList());
         }
 
@@ -41,7 +46,16 @@ namespace Albertlund_Hjemmepleje.Controllers
         // GET: People/Create
         public ActionResult Create()
         {
-            return View();
+            if (Session["login"] == null)
+            {
+                return RedirectToAction("Login");
+            }
+            if (Session["admin"].Equals("admin"))
+            {
+                return View();
+            }
+                ViewBag.Error = TempData["error"];
+                return null;
         }
 
         // POST: People/Create
@@ -51,6 +65,8 @@ namespace Albertlund_Hjemmepleje.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "email,name,phone,occupation,role")] Person person)
         {
+
+            
             System.Diagnostics.Debug.WriteLine("Hej2");
              //if (ModelState.IsValid)
              { 
@@ -165,20 +181,42 @@ namespace Albertlund_Hjemmepleje.Controllers
                 Boolean verify = SecurePasswordHasher.Verify(password, person.password);
                 if (verify == true)
                 {
+                    Session["login"] = email;
+                    if (person.role)
+                    {
+                        Session["admin"] = "admin";
+                    }
+                    else
+                    {
+                        Session["admin"] = "user";
+                    }
+
                     return RedirectToAction("Index");
+
                 }
             }
 
-            Session["login"] = true;
+            
+
+
             return View();
         }
 
 
         public ActionResult Log()
         {
-            
-                return View(db.LogTable.ToList());
-            
+            if (Session["login"] == null)
+            {
+                return RedirectToAction("Login");
+            }
+
+            if (Session["admin"].Equals("admin"))
+            {
+                return View();
+            }
+
+            return null;
+
         }
 
       
