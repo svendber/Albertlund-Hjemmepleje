@@ -205,18 +205,9 @@ namespace Albertlund_Hjemmepleje.Controllers
 
         public ActionResult Log()
         {
-            if (Session["login"] == null)
-            {
-                return RedirectToAction("Login");
-            }
-
-            if (Session["admin"].Equals("admin"))
-            {
+            
                 return View();
-            }
-
-            return null;
-
+            
         }
 
       
