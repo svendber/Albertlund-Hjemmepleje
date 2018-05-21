@@ -16,14 +16,16 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Albertslund Homecare", "Login", "People", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Albertslund Homecare", "Home", "People", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Hjem", "Login", "People")</li>
-                    <li>@Html.ActionLink("Ret profil", "Edit", "People")</li>
+                    <li>@Html.ActionLink("Ret profil", "Settings", "People")</li>
                     <li>@Html.ActionLink("Opret bruger", "Create", "People")</li>
                     <li>@Html.ActionLink("Log", "Log", "People")</li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>@Html.ActionLink("Log ud", "Logout", "People")</li>
                 </ul>
             </div>
         </div>

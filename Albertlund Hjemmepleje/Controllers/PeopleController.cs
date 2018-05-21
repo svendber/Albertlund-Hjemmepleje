@@ -55,7 +55,7 @@ namespace Albertlund_Hjemmepleje.Controllers
                 return View();
             }
                 ViewBag.Error = TempData["error"];
-                return null;
+                return RedirectToAction("Home");
         }
 
         // POST: People/Create
@@ -65,16 +65,10 @@ namespace Albertlund_Hjemmepleje.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "email,name,phone,occupation,role")] Person person)
         {
-
-            
             System.Diagnostics.Debug.WriteLine("Hej2");
              //if (ModelState.IsValid)
              { 
-                
                 person.password = SecurePasswordHasher.Hash("NewUser123456");
-                //person.role = true;
-                //person.occupation = "ged";
-                //person.phone = 12345678;
                 db.People.Add(person); 
                 db.SaveChanges();
                 string email = person.email;
@@ -85,7 +79,7 @@ namespace Albertlund_Hjemmepleje.Controllers
                 System.Diagnostics.Debug.WriteLine(email);
                 sendMail(email, body);
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Home");
             }
 
             //return View(person);
@@ -191,23 +185,34 @@ namespace Albertlund_Hjemmepleje.Controllers
                         Session["admin"] = "user";
                     }
 
-                    return RedirectToAction("Index");
-
+                    return RedirectToAction("Home");
                 }
             }
-
-            
-
-
             return View();
+        }
+
+        public ActionResult Logout()
+        {
+            Session["login"] = null;
+
+            return RedirectToAction("Login");
         }
 
 
         public ActionResult Log()
         {
-            
-                return View(db.LogTable.ToList());
-            
+            if (Session["login"] == null)
+            {
+                return RedirectToAction("Login");
+            }
+
+            if (Session["admin"].Equals("admin"))
+            {
+                return View();
+            }
+
+            return RedirectToAction("Home");
+
         }
 
       
@@ -230,9 +235,22 @@ namespace Albertlund_Hjemmepleje.Controllers
                 sendMail(email, body);
             }
             return View();
-            
         }
 
+        public ActionResult Settings()
+        {
+            if (Session["login"] == null)
+            {
+                return RedirectToAction("Login");
+            }
+
+            return View();
+        }
+
+        public ActionResult Home()
+        {
+            return View();
+        }
         public void sendMail(string toMail, string body)
         {
             if (String.IsNullOrEmpty(toMail))
