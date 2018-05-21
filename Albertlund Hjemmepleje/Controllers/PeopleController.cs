@@ -54,8 +54,8 @@ namespace Albertlund_Hjemmepleje.Controllers
             {
                 return View();
             }
-
-            return null;
+                ViewBag.Error = TempData["error"];
+                return null;
         }
 
         // POST: People/Create
