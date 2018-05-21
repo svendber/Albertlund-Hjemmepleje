@@ -202,6 +202,13 @@ namespace Albertlund_Hjemmepleje.Controllers
             return View();
         }
 
+        public ActionResult Logout()
+        {
+            Session["login"] = null;
+
+            return RedirectToAction("Login");
+        }
+
 
         public ActionResult Log()
         {
