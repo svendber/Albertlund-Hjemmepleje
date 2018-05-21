@@ -65,16 +65,10 @@ namespace Albertlund_Hjemmepleje.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "email,name,phone,occupation,role")] Person person)
         {
-
-            
             System.Diagnostics.Debug.WriteLine("Hej2");
              //if (ModelState.IsValid)
              { 
-                
                 person.password = SecurePasswordHasher.Hash("NewUser123456");
-                //person.role = true;
-                //person.occupation = "ged";
-                //person.phone = 12345678;
                 db.People.Add(person); 
                 db.SaveChanges();
                 string email = person.email;
