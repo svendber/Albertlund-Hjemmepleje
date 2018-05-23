@@ -14,6 +14,7 @@ namespace Albertlund_Hjemmepleje.Controllers
     public class PeopleController : Controller
     {
         private Albertlund_HjemmeplejeContext db = new Albertlund_HjemmeplejeContext();
+        
 
         // GET: People
         public ActionResult Index()
@@ -161,10 +162,13 @@ namespace Albertlund_Hjemmepleje.Controllers
 
         public ActionResult Login()
         {
+            
             string email = Request["email"];
             string password = Request["password"];
-
+            
             Person person = db.People.Find(email);
+            DateTime dateTime = DateTime.Now;
+
 
             if (person == null)
             {
@@ -179,15 +183,23 @@ namespace Albertlund_Hjemmepleje.Controllers
                     if (person.role)
                     {
                         Session["admin"] = "admin";
+                        
                     }
                     else
                     {
                         Session["admin"] = "user";
                     }
-
+                    Log log = new Log();
+                    log.email = person.email;
+                    log.time = dateTime;
+                    db.Logs.Add(log);
+                    db.SaveChanges(); 
                     return RedirectToAction("Home");
                 }
             }
+            string navbar = "hide";
+            TempData["NavBar"] = navbar;
+
             return View();
         }
 
@@ -199,7 +211,7 @@ namespace Albertlund_Hjemmepleje.Controllers
         }
 
 
-        public ActionResult Log()
+        public ActionResult Logasdasd()
         {
             if (Session["login"] == null)
             {
@@ -208,7 +220,7 @@ namespace Albertlund_Hjemmepleje.Controllers
 
             if (Session["admin"].Equals("admin"))
             {
-                return View();
+           //     return View(db.LogTable.ToList());
             }
 
             return RedirectToAction("Home");
@@ -234,6 +246,7 @@ namespace Albertlund_Hjemmepleje.Controllers
                 db.SaveChanges();
                 sendMail(email, body);
             }
+           
             return View();
         }
 

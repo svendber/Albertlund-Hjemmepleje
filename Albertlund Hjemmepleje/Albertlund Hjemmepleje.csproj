@@ -17,8 +17,7 @@
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <Use64BitIISExpress>
-    </Use64BitIISExpress>
+    <Use64BitIISExpress>false</Use64BitIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -175,6 +174,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\LogsController.cs" />
     <Compile Include="Controllers\PeopleController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -191,12 +191,9 @@
     <Compile Include="Migrations\201805171306330_boooh.Designer.cs">
       <DependentUpon>201805171306330_boooh.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201805211244111_Log.cs" />
-    <Compile Include="Migrations\201805211244111_Log.Designer.cs">
-      <DependentUpon>201805211244111_Log.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Albertlund_HjemmeplejeContext.cs" />
+    <Compile Include="Models\Albertlund_HjemmeplejeContext2.cs" />
     <Compile Include="Models\Entities\Log.cs" />
     <Compile Include="Models\Entities\Person.cs" />
     <Compile Include="Models\Entities\SecurePasswordHasher.cs" />
@@ -252,6 +249,11 @@
     <Content Include="Views\People\Log.cshtml" />
     <Content Include="Views\People\Settings.cshtml" />
     <Content Include="Views\People\Home.cshtml" />
+    <Content Include="Views\Logs\Create.cshtml" />
+    <Content Include="Views\Logs\Delete.cshtml" />
+    <Content Include="Views\Logs\Details.cshtml" />
+    <Content Include="Views\Logs\Edit.cshtml" />
+    <Content Include="Views\Logs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -278,9 +280,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805171306330_boooh.resx">
       <DependentUpon>201805171306330_boooh.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805211244111_Log.resx">
-      <DependentUpon>201805211244111_Log.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
