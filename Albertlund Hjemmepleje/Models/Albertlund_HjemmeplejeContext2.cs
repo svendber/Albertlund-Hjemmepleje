@@ -6,7 +6,7 @@ using System.Web;
 
 namespace Albertlund_Hjemmepleje.Models
 {
-    public class Albertlund_HjemmeplejeContext : DbContext
+    public class Albertlund_HjemmeplejeContext2 : DbContext
     {
         // You can add custom code to this file. Changes will not be overwritten.
         // 
@@ -14,14 +14,11 @@ namespace Albertlund_Hjemmepleje.Models
         // automatically whenever you change your model schema, please use data migrations.
         // For more information refer to the documentation:
         // http://msdn.microsoft.com/en-us/data/jj591621.aspx
-
-        public Albertlund_HjemmeplejeContext() : base("name=Albertlund_HjemmeplejeContext")
+    
+        public Albertlund_HjemmeplejeContext2() : base("name=Albertlund_HjemmeplejeContext2")
         {
         }
 
-        public System.Data.Entity.DbSet<Albertlund_Hjemmepleje.Models.Entities.Person> People { get; set; }
-        public System.Data.Entity.DbSet<Albertlund_Hjemmepleje.Models.Entities.Log> Logs { get; set; }
-
+    //    public System.Data.Entity.DbSet<Albertlund_Hjemmepleje.Models.Entities.Log> Logs { get; set; }
     }
 }
-
