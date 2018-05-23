@@ -1,19 +1,25 @@
 ﻿using Albertlund_Hjemmepleje.Models;
 using Albertlund_Hjemmepleje.Models.Entities;
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Web.Mvc;
 using System.Data.SqlClient;
 using System.Text;
+using System.Threading.Tasks;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
 
 namespace Albertlund_Hjemmepleje.Controllers
 {
     public class PeopleController : Controller
     {
         private Albertlund_HjemmeplejeContext db = new Albertlund_HjemmeplejeContext();
+        private string loggedInUser;
 
         // GET: People
         public ActionResult Index()
@@ -173,9 +179,11 @@ namespace Albertlund_Hjemmepleje.Controllers
             else
             {
                 Boolean verify = SecurePasswordHasher.Verify(password, person.password);
-                if (verify == true)
+                if (verify)
                 {
+                    
                     Session["login"] = email;
+                    loggedInUser = email;
                     if (person.role)
                     {
                         Session["admin"] = "admin";
@@ -212,9 +220,7 @@ namespace Albertlund_Hjemmepleje.Controllers
             }
 
             return RedirectToAction("Home");
-
         }
-
       
         public ActionResult ForgottenPassword()
         {
@@ -222,9 +228,7 @@ namespace Albertlund_Hjemmepleje.Controllers
             Person person = db.People.Find(email);
 
             if (person == null)
-            {
-
-            }
+            {}
             else
             {
                 string body = "Hej \n Dit password er nulstillet. \n " +
@@ -243,9 +247,56 @@ namespace Albertlund_Hjemmepleje.Controllers
             {
                 return RedirectToAction("Login");
             }
+            string email = Session["login"].ToString();
+            Person person = db.People.Find(email);
 
-            return View();
+            return View(person);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Settings([Bind(Include = "email,name,phone,password")]
+            Person person)
+        {
+            string email = Request["email"];
+            Person tempPerson = db.People.Find(email);
+
+            if (tempPerson == null)
+            {
+
+            }
+            else
+            {
+                tempPerson.name = Request["name"];
+                tempPerson.phone = Request["phone"];
+                bool isHashed = SecurePasswordHasher.IsHashSupported(Request["password"]);
+                if (!isHashed)
+                {
+                    tempPerson.password = SecurePasswordHasher.Hash(Request["password"]);
+                }
+
+
+                //if (ModelState.IsValid)
+                
+                    //person.password = SecurePasswordHasher.Hash(person.password);
+                    //db.Entry(person).State = EntityState.Modified;
+                    //db.Entry(person).Property("name").IsModified = true;
+                    //db.Entry(person).Property("phone").IsModified = true;
+                    //db.Entry(person).Property("password").IsModified = true;
+                    db.People.AddOrUpdate(person);
+                    System.Diagnostics.Debug.WriteLine("Before saved");
+                    db.SaveChanges();
+                    System.Diagnostics.Debug.WriteLine("Saved");
+                
+            }
+
+            return RedirectToAction("Home");
+                
+            
+
+            //return View(person);
+        }
+
 
         public ActionResult Home()
         {
