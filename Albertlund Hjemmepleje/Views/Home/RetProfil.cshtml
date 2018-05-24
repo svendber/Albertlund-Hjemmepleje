@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "RetProfil";
+}
+
+<div class="jumbotron">
+    <form method="post">
+    <fieldset class="">
+        <legend>Ret profil</legend>
+        Fulde navn
+        <br><input type="text" name="fullname"/><br>
+        E-mail
+        <br><input type="text" name="email"/><br>
+        Telefonnummer
+        <br><input type="number" name="phone"/><br>
+        Stilling
+        <input type="text" name="occupation"/><br>
+
+        <input type="submit" onserverclick="location.ref='@Url.Action("Login")'" class="submit" onclick="alert('Brugeren er rettet')" />
+        </fieldset>
+    </form>
+</div>
