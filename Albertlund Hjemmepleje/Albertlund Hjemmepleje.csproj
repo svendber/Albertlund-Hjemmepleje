@@ -193,7 +193,6 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Albertlund_HjemmeplejeContext.cs" />
-    <Compile Include="Models\Albertlund_HjemmeplejeContext2.cs" />
     <Compile Include="Models\Entities\Log.cs" />
     <Compile Include="Models\Entities\Person.cs" />
     <Compile Include="Models\Entities\SecurePasswordHasher.cs" />
@@ -236,8 +235,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\People\Login.cshtml" />
-    <Content Include="Views\Home\RetProfil.cshtml" />
-    <Content Include="Views\Home\OpretBruger.cshtml" />
     <Content Include="Views\People\Create.cshtml" />
     <Content Include="Views\People\Delete.cshtml" />
     <Content Include="Views\People\Details.cshtml" />

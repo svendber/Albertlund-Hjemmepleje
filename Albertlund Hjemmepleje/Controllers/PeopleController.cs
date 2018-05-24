@@ -20,8 +20,7 @@ namespace Albertlund_Hjemmepleje.Controllers
     {
         private Albertlund_HjemmeplejeContext db = new Albertlund_HjemmeplejeContext();
         
-
-        // GET: People
+        
         public ActionResult Index()
         {
             if (Session["login"] == null)
@@ -31,8 +30,7 @@ namespace Albertlund_Hjemmepleje.Controllers
             }
             return View(db.People.ToList());
         }
-
-        // GET: People/Details/5
+        
         public ActionResult Details(string email)
         {
             if (email == null)
@@ -49,7 +47,7 @@ namespace Albertlund_Hjemmepleje.Controllers
             return View(person);
         }
 
-        // GET: People/Create
+  
         public ActionResult Create()
         {
             if (Session["login"] == null)
@@ -64,15 +62,13 @@ namespace Albertlund_Hjemmepleje.Controllers
                 return RedirectToAction("Home");
         }
 
-        // POST: People/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+  
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "email,name,phone,occupation,role")] Person person)
         {
-            System.Diagnostics.Debug.WriteLine("Hej2");
-             //if (ModelState.IsValid)
+            
+        
              { 
                 person.password = SecurePasswordHasher.Hash("NewUser123456");
                 db.People.Add(person); 
@@ -82,16 +78,15 @@ namespace Albertlund_Hjemmepleje.Controllers
                 string body = "Hej \n" + "Du er oprettet hos Albertslund Hjemmepleje \n" +
                               "Dette er dit password: \b NewUser123456 \n" +
                               "Vi anbefaler dig, at du ændrer det første gang, du logger ind.";
-                System.Diagnostics.Debug.WriteLine(email);
+                
                 sendMail(email, body);
 
                 return RedirectToAction("Home");
             }
-
-            //return View(person);
+            
         }
 
-        // GET: People/Edit/5
+        
         public ActionResult Edit(string email)
         {
             if (email == null)
@@ -108,9 +103,6 @@ namespace Albertlund_Hjemmepleje.Controllers
             return View(person);
         }
 
-        // POST: People/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "email,name,password,role,occupation")]
@@ -127,7 +119,7 @@ namespace Albertlund_Hjemmepleje.Controllers
             return View(person);
         }
 
-        // GET: People/Delete/5
+     
         public ActionResult Delete(string email)
         {
             if (email == null)
@@ -144,7 +136,7 @@ namespace Albertlund_Hjemmepleje.Controllers
             return View(person);
         }
 
-        // POST: People/Delete/5
+
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string email)
@@ -217,21 +209,7 @@ namespace Albertlund_Hjemmepleje.Controllers
         }
 
 
-        public ActionResult Logasdasd()
-        {
-            if (Session["login"] == null)
-            {
-                return RedirectToAction("Login");
-            }
-
-            if (Session["admin"].Equals("admin"))
-            {
-           //     return View(db.LogTable.ToList());
-            }
-
-            return RedirectToAction("Home");
-        }
-      
+     
         public ActionResult ForgottenPassword()
         {
             string email = Request["email"];
@@ -266,48 +244,40 @@ namespace Albertlund_Hjemmepleje.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Settings([Bind(Include = "email,name,phone,password")]
+        public ActionResult Settings([Bind(Include = "email,name,phone,password, occupation")]
             Person person)
         {
+          
             string email = Request["email"];
-            Person tempPerson = db.People.Find(email);
+            
 
-            if (tempPerson == null)
+            System.Diagnostics.Debug.WriteLine(person.phone);
+            if (person == null)
             {
-
+                System.Diagnostics.Debug.WriteLine("person is null");
             }
             else
             {
-                tempPerson.name = Request["name"];
-                tempPerson.phone = Request["phone"];
+                System.Diagnostics.Debug.WriteLine("går den ud");
+                string confirmPassword = Request["password_confirm"];
+                person.name = Request["name"];
+                person.email = Request["email"];
+                person.phone = Request["phone"];
                 bool isHashed = SecurePasswordHasher.IsHashSupported(Request["password"]);
-                if (!isHashed)
-                {
-                    tempPerson.password = SecurePasswordHasher.Hash(Request["password"]);
-                }
+                person.password = SecurePasswordHasher.Hash(Request["password"]);
 
+               
+                db.People.AddOrUpdate(person);
+              
+                db.SaveChanges();
+                
 
-                //if (ModelState.IsValid)
-                
-                    //person.password = SecurePasswordHasher.Hash(person.password);
-                    //db.Entry(person).State = EntityState.Modified;
-                    //db.Entry(person).Property("name").IsModified = true;
-                    //db.Entry(person).Property("phone").IsModified = true;
-                    //db.Entry(person).Property("password").IsModified = true;
-                    db.People.AddOrUpdate(person);
-                    System.Diagnostics.Debug.WriteLine("Before saved");
-                    db.SaveChanges();
-                    System.Diagnostics.Debug.WriteLine("Saved");
-                
             }
 
             return RedirectToAction("Home");
                 
-            
-
-            //return View(person);
+        
         }
-
 
         public ActionResult Home()
         {
@@ -321,7 +291,7 @@ namespace Albertlund_Hjemmepleje.Controllers
             {
                 MailMessage mail = new MailMessage();
                 mail.To.Add(toMail);
-                //mail.To.Add("xxx@gmail.com");
+               
                 mail.From = new MailAddress("albertslundhjemmepleje@gmail.com");
                 mail.Subject = "Your password to Albertslund Hjemmepleje.";
 

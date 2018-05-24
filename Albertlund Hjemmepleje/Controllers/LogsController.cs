@@ -15,13 +15,13 @@ namespace Albertlund_Hjemmepleje.Controllers
     {
         private Albertlund_HjemmeplejeContext db = new Albertlund_HjemmeplejeContext();
 
-        // GET: Logs
+       
         public ActionResult Index()
         {
             return View(db.Logs.ToList());
         }
 
-        // GET: Logs/Details/5
+ 
         public ActionResult Details(string id)
         {
             if (id == null)
@@ -36,15 +36,13 @@ namespace Albertlund_Hjemmepleje.Controllers
             return View(log);
         }
 
-        // GET: Logs/Create
+   
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Logs/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+      
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "email,time")] Log log)
@@ -59,7 +57,7 @@ namespace Albertlund_Hjemmepleje.Controllers
             return View(log);
         }
 
-        // GET: Logs/Edit/5
+      
         public ActionResult Edit(string id)
         {
             if (id == null)
@@ -74,9 +72,7 @@ namespace Albertlund_Hjemmepleje.Controllers
             return View(log);
         }
 
-        // POST: Logs/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+  
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "email,time")] Log log)
@@ -90,7 +86,7 @@ namespace Albertlund_Hjemmepleje.Controllers
             return View(log);
         }
 
-        // GET: Logs/Delete/5
+ 
         public ActionResult Delete(string id)
         {
             if (id == null)
@@ -105,7 +101,6 @@ namespace Albertlund_Hjemmepleje.Controllers
             return View(log);
         }
 
-        // POST: Logs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
