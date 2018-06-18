@@ -92,6 +92,8 @@ namespace Albertlund_Hjemmepleje.Controllers
         
         public ActionResult Edit(string email)
         {
+         
+
             if (email == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -111,6 +113,8 @@ namespace Albertlund_Hjemmepleje.Controllers
         public ActionResult Edit([Bind(Include = "email,name,password,role,occupation")]
             Person person)
         {
+          
+
             if (ModelState.IsValid)
             {
                 person.password = SecurePasswordHasher.Hash(person.password);
@@ -238,6 +242,12 @@ namespace Albertlund_Hjemmepleje.Controllers
 
         public ActionResult Settings()
         {
+
+            if (Session["admin"] == "user")
+            {
+                TempData["notAdmin"] = "user";
+            }
+
             if (Session["login"] == null)
             {
                 return RedirectToAction("Login");
@@ -253,7 +263,9 @@ namespace Albertlund_Hjemmepleje.Controllers
         public ActionResult Settings([Bind(Include = "email,name,phone,password, occupation")]
             Person person)
         {
-          
+
+
+
             string email = Request["email"];
             
 
