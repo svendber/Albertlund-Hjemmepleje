@@ -67,8 +67,6 @@ namespace Albertlund_Hjemmepleje.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "email,name,phone,occupation,role")] Person person)
         {
-            
-        
              { 
                 person.password = SecurePasswordHasher.Hash("NewUser123456");
                 db.People.Add(person); 
@@ -204,6 +202,8 @@ namespace Albertlund_Hjemmepleje.Controllers
         public ActionResult Logout()
         {
             Session["login"] = null;
+            TempData["NavBar"] = null;
+            TempData["notAdmin"] = null;
 
             return RedirectToAction("Login");
         }

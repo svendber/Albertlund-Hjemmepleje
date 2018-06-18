@@ -8,7 +8,6 @@ namespace Albertlund_Hjemmepleje.Models.Entities
 {
     public class Person
     {
-
        [Key]
         public string email { get; set; }
         [System.ComponentModel.DataAnnotations.Required]
@@ -22,9 +21,6 @@ namespace Albertlund_Hjemmepleje.Models.Entities
         public string occupation { get; set; }
         [System.ComponentModel.DataAnnotations.Required]
         public string phone { get; set; }
-       
-
-
     }
 }
 
