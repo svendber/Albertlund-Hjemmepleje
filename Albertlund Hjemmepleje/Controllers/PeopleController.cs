@@ -313,7 +313,7 @@ namespace Albertlund_Hjemmepleje.Controllers
                 mail.Subject = "Your password to Albertslund Hjemmepleje.";
 
                 mail.Body = body;
-
+            //Console.Write();
                 mail.IsBodyHtml = false;
                 SmtpClient smtp = new SmtpClient();
                 smtp.Host = "smtp.gmail.com"; 
