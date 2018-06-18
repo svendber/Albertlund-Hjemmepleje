@@ -11,10 +11,10 @@ namespace Albertlund_Hjemmepleje.Models
         
     
 
-        public Albertlund_HjemmeplejeContext() : base("name=Albertlund_HjemmeplejeContext")
-        {
-        }
-
+        public Albertlund_HjemmeplejeContext() : base("name=Albertlund_HjemmeplejeContext"){}
+    
+  //      public Albertlund_HjemmeplejeContext() : base("AlberslundDB"){}
+        
         public System.Data.Entity.DbSet<Albertlund_Hjemmepleje.Models.Entities.Person> People { get; set; }
         public System.Data.Entity.DbSet<Albertlund_Hjemmepleje.Models.Entities.Log> Logs { get; set; }
 
