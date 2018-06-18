@@ -181,7 +181,7 @@ namespace Albertlund_Hjemmepleje.Controllers
                     if (person.role)
                     {
                         Session["admin"] = "admin";
-                        
+                        TempData["notAdmin"] = "admin";
                     }
                     else
                     {

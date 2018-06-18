@@ -18,7 +18,7 @@ namespace Albertlund_Hjemmepleje.Controllers
        
         public ActionResult Index()
         {
-            return View(db.Logs.ToList());
+         return View(db.Logs.ToList());
         }
 
  

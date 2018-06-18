@@ -21,22 +21,29 @@
             </div>
 
             @switch (TempData["NavBar"])
-    {
-        case "hide":
-            break;
-        default:
-            <div id="theDiv" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Ret profil", "Settings", "People")</li>
-                    <li>@Html.ActionLink("Opret bruger", "Create", "People")</li>
-                    <li>@Html.ActionLink("Log", "Index", "Logs")</li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li>@Html.ActionLink("Log ud", "Logout", "People")</li>
-                </ul>
-            </div>
-    break;
-}
+            {
+                case "hide":
+                    break;
+                default:
+                    <div id="theDiv" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li>@Html.ActionLink("Ret profil", "Settings", "People")</li>
+                            @switch (TempData["notAdmin"])
+                                        {
+                                            case "admin":
+                                                <li>@Html.ActionLink("Opret bruger", "Create", "People")</li>
+                                                <li>@Html.ActionLink("Log", "Index", "Logs")</li>
+                                                break;
+                                            default:
+                                                break;
+                                        }
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>@Html.ActionLink("Log ud", "Logout", "People")</li>
+                        </ul>
+                    </div>
+                    break;
+            }
 
         </div>
     </div>
@@ -48,13 +55,13 @@
         </footer>
     </div>
 
-    <script type="text/javascript">
-        window.onload = function () {
-            if (Session["login"] == null) {
-                document.getElementById("theDiv").style.display = 'none';
-            }
-            }
-    </script>
+    <!-- <script type="text/javascript">
+         window.onload = function () {
+             if (Session["login"] == null) {
+                 document.getElementById("theDiv").style.display = 'none';
+             }
+         }
+     </script> -->
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
