@@ -30,7 +30,8 @@ namespace Albertlund_Hjemmepleje.Controllers
             }
             return View(db.People.ToList());
         }
-        
+     
+
         public ActionResult Details(string email)
         {
             if (email == null)
@@ -50,6 +51,10 @@ namespace Albertlund_Hjemmepleje.Controllers
   
         public ActionResult Create()
         {
+            if (Session["admin"] == "user")
+            {
+                TempData["notAdmin"] = "user";
+            }
             if (Session["login"] == null)
             {
                 return RedirectToAction("Login");
@@ -58,7 +63,7 @@ namespace Albertlund_Hjemmepleje.Controllers
             {
                 return View();
             }
-                ViewBag.Error = TempData["error"];
+                //ViewBag.Error = TempData["error"];
                 return RedirectToAction("Home");
         }
 
@@ -179,7 +184,7 @@ namespace Albertlund_Hjemmepleje.Controllers
                     if (person.role)
                     {
                         Session["admin"] = "admin";
-                        TempData["notAdmin"] = "admin";
+                        //TempData["notAdmin"] = "admin";
                     }
                     else
                     {
@@ -204,7 +209,6 @@ namespace Albertlund_Hjemmepleje.Controllers
             Session["login"] = null;
             TempData["NavBar"] = null;
             TempData["notAdmin"] = null;
-
             return RedirectToAction("Login");
         }
 
@@ -214,6 +218,8 @@ namespace Albertlund_Hjemmepleje.Controllers
         {
             string email = Request["email"];
             Person person = db.People.Find(email);
+            string navbar = "hide";
+            TempData["NavBar"] = navbar;
 
             if (person == null)
             {}
@@ -279,10 +285,21 @@ namespace Albertlund_Hjemmepleje.Controllers
         
         }
 
-        public ActionResult Home()
+       public ActionResult Home()
         {
+            if (Session["login"] == null)
+            {
+
+                return RedirectToAction("Login");
+            }
+            if (Session["admin"] == "user")
+            {
+                TempData["notAdmin"] = "user";
+            }
+
             return View();
         }
+       
         public void sendMail(string toMail, string body)
         {
             if (String.IsNullOrEmpty(toMail))

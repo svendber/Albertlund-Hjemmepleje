@@ -29,14 +29,14 @@
                         <ul class="nav navbar-nav">
                             <li>@Html.ActionLink("Ret profil", "Settings", "People")</li>
                             @switch (TempData["notAdmin"])
-                                        {
-                                            case "admin":
-                                                <li>@Html.ActionLink("Opret bruger", "Create", "People")</li>
-                                                <li>@Html.ActionLink("Log", "Index", "Logs")</li>
-                                                break;
-                                            default:
-                                                break;
-                                        }
+    {
+        case "user":
+            break;
+        default:
+                        <li>@Html.ActionLink("Opret bruger", "Create", "People")</li>
+                        <li>@Html.ActionLink("Log", "Index", "Logs")</li>
+            break;
+}
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li>@Html.ActionLink("Log ud", "Logout", "People")</li>
