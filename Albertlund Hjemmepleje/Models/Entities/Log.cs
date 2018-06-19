@@ -10,9 +10,7 @@ namespace Albertlund_Hjemmepleje.Models.Entities
     {
         [Key]
         public int id { get; set; }
-     
         public string email { get; set; }
-        
         public DateTime time { get; set; }
     
     }
