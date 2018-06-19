@@ -259,11 +259,11 @@
     <Content Include="Views\People\Log.cshtml" />
     <Content Include="Views\People\Settings.cshtml" />
     <Content Include="Views\People\Home.cshtml" />
-    <Content Include="Views\Logs\Create.cshtml" />
-    <Content Include="Views\Logs\Delete.cshtml" />
-    <Content Include="Views\Logs\Details.cshtml" />
-    <Content Include="Views\Logs\Edit.cshtml" />
-    <Content Include="Views\Logs\Index.cshtml" />
+    <Content Include="Views\Log\Create.cshtml" />
+    <Content Include="Views\Log\Delete.cshtml" />
+    <Content Include="Views\Log\Details.cshtml" />
+    <Content Include="Views\Log\Edit.cshtml" />
+    <Content Include="Views\Log\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
