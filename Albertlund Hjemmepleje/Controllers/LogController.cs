@@ -11,7 +11,7 @@ using Albertlund_Hjemmepleje.Models.Entities;
 
 namespace Albertlund_Hjemmepleje.Controllers
 {
-    public class LogsController : Controller
+    public class LogController : Controller
     {
         private Albertlund_HjemmeplejeContext db = new Albertlund_HjemmeplejeContext();
 
